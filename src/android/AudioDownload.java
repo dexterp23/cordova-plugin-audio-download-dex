@@ -45,7 +45,7 @@ import android.content.pm.PackageManager.NameNotFoundException;;
 
 public class AudioDownload extends CordovaPlugin {
 	
-	private static final String TAG = "FBLOG";
+	private static final String TAG = "FBLOG"; //test
 	
 	public static final int PERMISSION_DENIED_ERROR = 20;
 	private static final int DOWNLOAD_AUDIO = 0;
