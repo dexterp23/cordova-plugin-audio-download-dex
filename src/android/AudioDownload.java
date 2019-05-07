@@ -50,6 +50,7 @@ public class AudioDownload extends CordovaPlugin {
 	public static final int PERMISSION_DENIED_ERROR = 20;
 	private static final int DOWNLOAD_AUDIO = 0;
 	String url_download = null;
+	String audio_title = null;
     String fileName = null;
     InputStream input = null;
     OutputStream output = null;
@@ -65,12 +66,15 @@ public class AudioDownload extends CordovaPlugin {
 			if (options != null) {
 				
 				url_download = options.getString("AudioURI");
+				audio_title = options.getString("AudioTitle");
+				if (audio_title == null || audio_title.isEmpty() || audio_title.equals("null")) audio_title = "audio_file";
         		startDownload();
 				/*
 				JSONObject r = new JSONObject();	
 				r.put("AudioURI", options.getString("AudioURI"));
 				callbackContext.success(r);
 				*/
+				callbackContext.success(fileName);
 			} else {
 				callbackContext.error("There Is No Audio");	
 				return false;
@@ -173,7 +177,7 @@ public class AudioDownload extends CordovaPlugin {
 	}
 	
 	private String getAudioFilePath(Context context) {
-    	return context.getExternalFilesDir(null).getAbsolutePath() + "/audio_file.mp3";
+    	return context.getExternalFilesDir(null).getAbsolutePath() + "/"+audio_title+".mp3";
     }
 	
 	public void onRequestPermissionResult(int requestCode, String[] permissions,
