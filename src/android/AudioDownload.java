@@ -65,16 +65,17 @@ public class AudioDownload extends CordovaPlugin {
 			
 			if (options != null) {
 				
+				fileName = null;
 				url_download = options.getString("AudioURI");
 				audio_title = options.getString("AudioTitle");
 				if (audio_title == null || audio_title.isEmpty() || audio_title.equals("null")) audio_title = "audio_file";
-        		String Return = startDownload();
+        		startDownload();
 				/*
 				JSONObject r = new JSONObject();	
 				r.put("AudioURI", options.getString("AudioURI"));
 				callbackContext.success(r);
 				*/
-				callbackContext.success(Return);
+				callbackContext.success(fileName);
 			} else {
 				callbackContext.error("There Is No Audio");	
 				return false;
@@ -140,8 +141,6 @@ public class AudioDownload extends CordovaPlugin {
 								//Log.i(TAG, String.valueOf("progress: " + (int) (total * 100 / fileLength)));
 							output.write(data, 0, count);
 						}
-						
-						return fileName;
 						
 					} catch (Exception e) {
 						//return e.toString();
